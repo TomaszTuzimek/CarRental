@@ -7,20 +7,9 @@ pipeline {
       }
     }
 
-    stage('Confirmation') {
-      parallel {
-        stage('error') {
-          steps {
-            echo 'All OK'
-          }
-        }
-
-        stage('Install') {
-          steps {
-            sh 'mvn clean install'
-          }
-        }
-
+    stage('Install') {
+      steps {
+        sh 'mvn clean install'
       }
     }
 
