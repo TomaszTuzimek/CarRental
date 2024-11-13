@@ -7,9 +7,32 @@ pipeline {
       }
     }
 
-    stage('') {
+    stage('Confirmation') {
+      parallel {
+        stage('error') {
+          steps {
+            echo 'All OK'
+          }
+        }
+
+        stage('Install') {
+          steps {
+            sh 'mvn clean install'
+          }
+        }
+
+      }
+    }
+
+    stage('Build') {
       steps {
-        echo 'All OK'
+        sh 'mvn clean package'
+      }
+    }
+
+    stage('Run') {
+      steps {
+        sh 'java -jar target/CarRental-1.jar'
       }
     }
 
